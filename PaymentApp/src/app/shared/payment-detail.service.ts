@@ -9,19 +9,19 @@ import { PaymentDetail } from './payment-detail.model';
 export class PaymentDetailService {
 
   url: string = environment.apiBaseUrl + "/PaymentDetail";
-  list:PaymentDetail[] = [];
-
+  list: PaymentDetail[] = [];
+  formData: PaymentDetail = new PaymentDetail();
   constructor(private http: HttpClient) { }
 
   refreshList() {
     this.http.get(this.url)
-    .subscribe({
-      next: res => {
-        this.list = res as PaymentDetail[];
-      },
-      error: err => {
-        console.log(err);
-      }
-    })
+      .subscribe({
+        next: res => {
+          this.list = res as PaymentDetail[];
+        },
+        error: err => {
+          console.log(err);
+        }
+      })
   }
 }
