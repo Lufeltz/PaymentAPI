@@ -70,7 +70,7 @@ namespace PaymentAPI.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(await _context.PaymentDetails.ToListAsync());
         }
 
         // POST: api/PaymentDetail
@@ -78,11 +78,13 @@ namespace PaymentAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<PaymentDetail>> PostPaymentDetail(PaymentDetail paymentDetail)
         {
+
             _context.PaymentDetails.Add(paymentDetail);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetPaymentDetail), new { id = paymentDetail.PaymentDetailId }, paymentDetail);
+            return Ok(await _context.PaymentDetails.ToListAsync());
         }
+
 
         // DELETE: api/PaymentDetail/5
         [HttpDelete("{id}")]
@@ -97,7 +99,7 @@ namespace PaymentAPI.Controllers
             _context.PaymentDetails.Remove(paymentDetail);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(await _context.PaymentDetails.ToListAsync());
         }
 
         private bool PaymentDetailExists(int id)
